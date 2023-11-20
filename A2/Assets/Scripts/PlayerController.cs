@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    public ParticleSystem bloodSplatter;
+    public GameObject GameOverScreen;
 
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            bloodSplatter.Play();
+            GameOverScreen.SetActive(true);
+        }
     }
 }

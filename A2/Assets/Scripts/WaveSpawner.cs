@@ -5,12 +5,12 @@ public class WaveSpawner : MonoBehaviour
 {
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
     public List<Enemy> enemies = new List<Enemy>();
-    public Transform spawnLocation;
+    public Transform[] spawnLocation;
 
     public int currentWave;
-    public int waveValue;
     public int waveDuration;
 
+    private int waveValue;
     private float waveTimer;
     private float spawnInterval;
     private float spawnTimer;
@@ -36,6 +36,9 @@ public class WaveSpawner : MonoBehaviour
             else
             {
                 waveTimer = 0;
+                currentWave += 1;
+                waveDuration += 10;
+                GenerateWave();
             }
         }
         else
@@ -78,7 +81,7 @@ public class WaveSpawner : MonoBehaviour
 
     public void RandomizeSpawnLocation()
     {
-        int randEnemy = Random.Range(0, enemiesToSpawn.Length);
+        int randEnemy = Random.Range(0, enemiesToSpawn.Count);
         int randSpawnLocation = Random.Range(0, spawnLocation.Length);
 
         Instantiate(enemiesToSpawn[randEnemy], spawnLocation[randSpawnLocation].position, Quaternion.identity);
