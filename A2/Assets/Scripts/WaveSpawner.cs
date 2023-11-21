@@ -26,8 +26,6 @@ public class WaveSpawner : MonoBehaviour
         {
             if(enemiesToSpawn.Count > 0)
             {
-                //Instantiate(enemiesToSpawn[0], spawnLocation.position, Quaternion.identity);
-
                 RandomizeSpawnLocation();
 
                 enemiesToSpawn.RemoveAt(0);
