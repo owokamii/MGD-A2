@@ -57,7 +57,7 @@ public class ZombieCharacterControl : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
@@ -66,7 +66,7 @@ public class ZombieCharacterControl : MonoBehaviour
             m_agent.speed = 0.0f;
             Destroy(gameObject, 2);
         }
-    }
+    }*/
 
     private void TankUpdate()
     {
