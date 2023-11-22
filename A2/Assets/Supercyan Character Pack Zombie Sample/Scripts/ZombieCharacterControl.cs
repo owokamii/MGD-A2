@@ -19,12 +19,9 @@ public class ZombieCharacterControl : MonoBehaviour
     [SerializeField] private float m_turnSpeed = 200;
 
     [SerializeField] private Animator m_animator = null;
-    [SerializeField] private Rigidbody m_rigidBody = null;
+    //[SerializeField] private Rigidbody m_rigidBody = null;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Tank;
-
-    public NavMeshAgent m_agent;
-    public ParticleSystem bloodSplatter;
 
     private float m_currentV = 0;
     private float m_currentH = 0;
@@ -36,7 +33,7 @@ public class ZombieCharacterControl : MonoBehaviour
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
-        if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+        //if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
 
     private void FixedUpdate()
@@ -56,17 +53,6 @@ public class ZombieCharacterControl : MonoBehaviour
                 break;
         }
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Bullet"))
-        {
-            m_animator.SetTrigger("Dead");
-            bloodSplatter.Play();
-            m_agent.speed = 0.0f;
-            Destroy(gameObject, 2);
-        }
-    }*/
 
     private void TankUpdate()
     {

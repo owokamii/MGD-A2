@@ -24,6 +24,7 @@ public class LevelLoader : MonoBehaviour
 
     public void Retry()
     {
+        PlayerController.PlayerIsDead = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

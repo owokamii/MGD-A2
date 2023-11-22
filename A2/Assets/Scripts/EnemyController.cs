@@ -3,10 +3,12 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public ParticleSystem bloodSplatter;
-
     [SerializeField] private Transform targetPos;
     [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem bloodSplatter;
+    [SerializeField] private CapsuleCollider zombieCollider;
+    [SerializeField] private AudioSource zombieNoise;
+    [SerializeField] private AudioSource zombieAttack;
 
     private NavMeshAgent zombie;
     private Vector3 pos;
@@ -16,22 +18,52 @@ public class EnemyController : MonoBehaviour
         zombie = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         bloodSplatter = GetComponentInChildren<ParticleSystem>();
-        pos.y = 0;
+        zombieCollider = GetComponent<CapsuleCollider>();
     }
 
     void Update()
     {
         zombie.destination = targetPos.position;
+        pos.y = -2.0f;
+
+        if(PlayerController.PlayerIsDead)
+        {
+            zombieNoise.Stop();
+            zombie.speed = 0.0f;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            animator.SetTrigger("Dead");
-            bloodSplatter.Play();
-            zombie.speed = 0.0f;
-            Destroy(gameObject, 2);
+            ZombieCollidesSomething();
+            ZombieDies();
         }
+
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            ZombieCollidesSomething();
+            ZombieBites();
+        }
+    }
+
+    private void ZombieDies()
+    {
+        animator.SetTrigger("Dead");
+        zombieCollider.enabled = false;
+        Destroy(gameObject, 1);
+    }
+
+    private void ZombieBites()
+    {
+        animator.SetTrigger("Attack");
+        zombieAttack.Play();
+    }
+
+    private void ZombieCollidesSomething()
+    {
+        bloodSplatter.Play();
+        zombie.speed = 0.0f;
     }
 }

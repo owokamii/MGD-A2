@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826876182668316450}
+  - component: {fileID: 9056905128608153638}
+  - component: {fileID: 1482324232343127967}
   - component: {fileID: 5784096166331794785}
   - component: {fileID: 1937714231135530162}
   - component: {fileID: 2516094279729594860}
   - component: {fileID: 2823710351535044499}
-  - component: {fileID: 9056905128608153638}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7768098108860622197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 20}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38,6 +39,56 @@ Transform:
   - {fileID: 4299100605109536544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9056905128608153638
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768098108860622197}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &1482324232343127967
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768098108860622197}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!114 &5784096166331794785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,8 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba770fcb7077b94ab41094dc4921d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {fileID: 232226912547696850, guid: 9beb93b23f184894a8618a2bbc9a6029,
+  targetPos: {fileID: 2079766582711183462, guid: c86a272d414c9404c87ecf36402ce250,
     type: 3}
+  animator: {fileID: 0}
+  bloodSplatter: {fileID: 0}
+  zombieCollider: {fileID: 0}
+  zombieNoise: {fileID: 2516094279729594860}
+  zombieAttack: {fileID: 2823710351535044499}
 --- !u!195 &1937714231135530162
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -87,7 +143,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: d28b32d135b09ad4780c6ed7bb022cfd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -180,10 +236,11 @@ AudioSource:
   m_GameObject: {fileID: 7768098108860622197}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  OutputAudioMixerGroup: {fileID: 6912823890886551373, guid: d2fbd8a0647cadf4587ace368f86d3fa,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: fab656b865eb3494bbfea2415fecb38d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -227,7 +284,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -267,29 +324,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &9056905128608153638
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768098108860622197}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &4101865960860512114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,12 +392,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b731e64ade9af9f4ab36776d7c5c1d3b, type: 3}
---- !u!198 &694097213193237552 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3552545052765182786, guid: b731e64ade9af9f4ab36776d7c5c1d3b,
-    type: 3}
-  m_PrefabInstance: {fileID: 4101865960860512114}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4299100605109536544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 235797290250659922, guid: b731e64ade9af9f4ab36776d7c5c1d3b,
@@ -420,21 +448,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4286830457523408, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114826528240450432, guid: 2869f50f08793594889040a0ec4b691e,
-        type: 3}
-      propertyPath: m_agent
-      value: 
-      objectReference: {fileID: 1937714231135530162}
-    - target: {fileID: 114826528240450432, guid: 2869f50f08793594889040a0ec4b691e,
-        type: 3}
-      propertyPath: bloodSplatter
-      value: 
-      objectReference: {fileID: 694097213193237552}
-    - target: {fileID: 136541158847485364, guid: 2869f50f08793594889040a0ec4b691e,
-        type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
