@@ -7,9 +7,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             ScoreManager.instance.AddPoint();
             Destroy(gameObject);

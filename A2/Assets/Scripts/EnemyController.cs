@@ -33,14 +33,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
             ZombieCollidesSomething();
             ZombieDies();
         }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
         if(collision.gameObject.CompareTag("Player"))
         {
             ZombieCollidesSomething();
